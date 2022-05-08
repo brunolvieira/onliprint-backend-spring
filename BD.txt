@@ -1,0 +1,55 @@
+CREATE DATABASE onliprint;
+
+USE onliprint;
+
+CREATE TABLE prestadores(
+	idPrestador INT NOT NULL AUTO_INCREMENT,
+	nome VARCHAR(20) NOT NULL,
+	sobrenome VARCHAR(20) NOT NULL,
+	cnpj VARCHAR(20) NOT NULL,
+	nomeEmpreendimento VARCHAR(30) NOT NULL,
+	CONSTRAINT PK_ID_PRESTADOR PRIMARY KEY(idPrestador)
+);
+
+CREATE TABLE contatos_prestadores(
+	idContatoPrestador INT NOT NULL AUTO_INCREMENT,
+	email VARCHAR(75) NOT NULL,
+	celular VARCHAR(20) NOT NULL,
+	telefone VARCHAR(20),
+	idPrestador INT NOT NULL,
+	CONSTRAINT PK_ID_CONTATO_PRESTADOR PRIMARY KEY(idContatoPrestador),
+	CONSTRAINT FK_ID_PRESTADO FOREIGN KEY(idPrestador) REFERENCES prestadores(idPrestador)
+);
+
+create table tblenderecoprestador(
+	idEnderecoPrestador int not null auto_increment,
+	logradouroEndereco varchar(80) not null,
+	numeroEndereco varchar(6) not null,
+	complementoEndereco varchar(50),
+	bairroEndereco varchar(50) not null,
+	cidadeEndereco varchar(50) not null,
+	ufEndereco char(2) not null,
+	longitude varchar(20) not null,
+	latitude varchar(20) not null,
+	prestadorEndereco int not null,
+	constraint PK_ID_ENDERECO primary key(idEnderecoPrestador),
+	constraint FK_ID_PRESTADOR_ENDERECO foreign key(prestadorEndereco) references tblPrestador(idPrestador)
+);
+
+create table tblLogonPrestador(
+	idLogonPrestador int not null auto_increment,
+	usuario varchar(75) not null,
+	senha varchar(40) not null,
+	prestadorLogon int not null,
+	constraint PK_ID_LOGONPRESTADOR primary key(idLogonPrestador),
+	constraint FK_PRESTADOR_LOGON foreign key(prestadorLogon) references tblPrestador(idPrestador)
+);
+
+create table tblPerguntaPrestador(
+	idPerguntaPrestador int not null auto_increment,
+	pergunta varchar(100) not null,
+	resposta varchar(40) not null,
+	prestadorPergunta int not null,
+	constraint PK_ID_PERGUNTA_SEG primary key(idPerguntaPrestador),
+	constraint FK_ID_PERGUNTA_PRESTADOR foreign key(prestadorPergunta) references tblPrestador(idPrestador)
+);
