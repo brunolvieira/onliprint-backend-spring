@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.onliprint.onliprintbackendspring.model.dto.ProvidersDTO;
+
 @Entity
 @Table(name="providers")
 public class ProvidersModel {
@@ -56,5 +58,18 @@ public class ProvidersModel {
 
 	public void setBusiness_name(String business_name) {
 		this.business_name = business_name;
+	}
+	
+	public ProvidersDTO toDto() {
+		
+		ProvidersDTO providerDto = new ProvidersDTO();
+		
+		providerDto.setIdProvider(this.id_provider);
+		providerDto.setName(this.name);
+		providerDto.setSurname(this.surname);
+		providerDto.setCnpj(this.cnpj);
+		providerDto.setBusinessName(this.business_name);
+		
+		return providerDto;
 	}
 }

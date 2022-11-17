@@ -1,5 +1,7 @@
 package com.onliprint.onliprintbackendspring.model.dto;
 
+import com.onliprint.onliprintbackendspring.model.ProvidersModel;
+
 public class ProvidersDTO {
 
 	private int idProvider;
@@ -46,5 +48,19 @@ public class ProvidersDTO {
 
 	public void setBusinessName(String businessName) {
 		this.businessName = businessName;
+	}
+	
+	public ProvidersModel toModel() {
+		
+		ProvidersModel providerModel = new ProvidersModel();
+		
+		providerModel.setId_provider(this.idProvider);
+		providerModel.setId_provider(this.getIdProvider());
+		providerModel.setName(this.getName());
+		providerModel.setSurname(this.getSurname());
+		providerModel.setCnpj(this.getCnpj());
+		providerModel.setBusiness_name(this.getBusinessName());
+		
+		return providerModel;
 	}
 }

@@ -1,5 +1,9 @@
 package com.onliprint.onliprintbackendspring.services;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +17,17 @@ public class ProvidersService {
 	@Autowired
 	private ProvidersRepository providersRepository;
 	
-	public void save(ProvidersDTO providerDTO) {
-		
-		ProvidersModel providerModel = new ProvidersModel();
-		
-		providerModel.setId_provider(providerDTO.getIdProvider());
-		providerModel.setName(providerDTO.getName());
-		providerModel.setSurname(providerDTO.getSurname());
-		providerModel.setCnpj(providerDTO.getCnpj());
-		providerModel.setBusiness_name(providerDTO.getBusinessName());
-		
-		providerModel = providersRepository.save(providerModel);
-		
-//		providerDTO.setIdProvider(providerModel.getId_provider());
-//		providerDTO.setName(providerModel.getName());
-//		providerDTO.setSurname(providerModel.getSurname());
-//		providerDTO.setCnpj(providerModel.getCnpj());
-//		providerDTO.setBusinessName(providerModel.getBusiness_name());
-//		
-//		return providerDTO;
+	public void save(ProvidersDTO providerDto) {
+		providersRepository.save(providerDto.toModel());
+	}
+
+	public List<ProvidersDTO> findAll() {
+		List<ProvidersModel> providersList = providersRepository.findAll();
+		return providersList.stream().map(model -> model.toDto()).collect(Collectors.toCollection(ArrayList :: new));
+	}
+
+	public ProvidersDTO findOneById(int providerId) {
+		ProvidersModel providerModel = this.providersRepository.findOneById(providerId);
+		return providerModel.toDto();
 	}
 }
