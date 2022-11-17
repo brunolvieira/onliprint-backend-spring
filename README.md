@@ -1,6 +1,6 @@
 # onliprint-backend-spring
 
-##Convertendo projeto de TCC criado no Curso Técnico
+## Convertendo projeto de TCC criado no Curso Técnico
 
 No intuito de estudar o framework **Spring**, o conceito de **micro serviços** e **API’s**, estou convertendo um projeto que primeiramente foi escrito em **PHP**, para **JAVA** com **SpringBoot**.
 
